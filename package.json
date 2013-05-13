@@ -19,5 +19,15 @@
   "author": "Noah Isaacson",
   "license": "BSD",
   "readmeFilename": "README.md",
-  "gitHead": "e1b391b5ff3347836f27db922e70bee699838244"
+  "gitHead": "e1b391b5ff3347836f27db922e70bee699838244",
+  "dependencies": {
+    "fleet-get-ps": "~1.0.1"
+  },
+  "devDependencies": {
+    "eyespect": "~0.1.8",
+    "should": "~1.2.2",
+    "mocha": "~1.9.0",
+    "portfinder": "~0.2.1",
+    "dispatch-spawn": "~1.0.2"
+  }
 }
