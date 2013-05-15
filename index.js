@@ -1,3 +1,4 @@
+var inspect = require('eyespect').inspector();
 var getPS = require('fleet-get-ps')
 module.exports = function (data, cb) {
   var drone = data.drone
@@ -14,29 +15,23 @@ module.exports = function (data, cb) {
       var drone = ps[droneKey]
       return drone
     })
-    if (drone) {
-      psCommands = ps[drone]
-    }
-    else {
-      psCommands = drones.reduce(function (a, b) {
-        return a.concat(b)
-      }, [])
-    }
-    psCommands = psCommands.filter(function (e) {
-      var keys = Object.keys(e)
-      return keys.length
+    psCommands = drones.reduce(function (a, b) {
+      return a.concat(b)
+    }, [])
+    var elements = psCommands.map(function (e) {
+      var pids = Object.keys(e)
+      var commands = pids.map(function (pid) {
+        var p = e[pid]
+        var command = p.command.join(' ')
+        return command
+      })
+      return commands
     })
-    var commands = psCommands.reduce(function (a, b) {
-      var keys = Object.keys(b)
-      var key = keys[0]
-      var element = b[key]
-      var command = element.command
-      command = command.join(' ')
-      a.push(command)
-      return a
+    var commands = elements.reduce(function (a, b) {
+      return a.concat(b)
     }, [])
     var instances = countInstances(command, commands)
-
+    inspect(instances,'instances')
     var spawnNeeded = false
     if (instances < data.instances) {
       spawnNeeded = true
