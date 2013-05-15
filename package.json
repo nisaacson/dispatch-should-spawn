@@ -1,6 +1,6 @@
 {
   "name": "dispatch-should-spawn",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "test if a command is already spawned the allotted number of times",
   "main": "index.js",
   "directories": {
